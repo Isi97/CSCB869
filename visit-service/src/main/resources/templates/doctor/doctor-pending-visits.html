@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: headerfiles"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+
+            <h1>Visits that require your attention.</h1>
+
+                <th:block th:each="visit : ${visits}">
+                    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header" th:text="${visit.pname}"></div>
+                        <div class="card-body">
+                            <a th:href="@{/doctor/visit/} + ${visit.visit.id}" class="btn btn-info">Open Visit</a>
+                            <a th:if="${visit.diagnosed}" th:href="@{/treatment/add/} + ${visit.visit.id} + '/' + ${visit.visit.did + '/' + visit.visit.pid}" class="btn btn-info">Add Treatment</a>
+                        </div>
+                    </div>
+                </th:block>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>

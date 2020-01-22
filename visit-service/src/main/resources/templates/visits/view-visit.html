@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="/fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <br><br><br>
+    <div class="col-lg-6">
+            <h2>Visit Details</h2>
+            <textarea readonly th:text="${visit.diagnosis}"></textarea>
+            <br>
+            <h4 th:if="${visit.sickLeave}" th:text="'A sick leave has been granted during this visit until ' + ${visit.sickLeaveEnd}"></h4>
+
+        <br><br><br>
+        <h2>Treatment assigned for this visit up to now: </h2>
+        <th:block th:each="t : ${tlist}">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Treatment</h5>
+                    <p class="card-text" th:text="${t.description}"></p>
+                </div>
+            </div>
+        </th:block>
+
+    </div>
+
+</div>
+
+
+<div th:replace="/fragments.html :: scripts"></div>
+
+</body>
+</html>

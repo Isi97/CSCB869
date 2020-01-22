@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="/fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <br><br><br>
+    <div class="col-lg-6">
+        <form th:action="@{/doctor/register}" th:object="${doctor}" method="post">
+            <h1>Fill out your doctor information:</h1>
+            <div class="form-group">
+                <label for="name" class="control-label">Name</label>
+                <input id="name" class="form-control" th:field="*{name}" />
+            </div>
+
+            <div class="form-group">
+                <label for="type" class="control-label">Doctor Specialization</label>
+                <input id="type" class="form-control" th:field="*{type}"/>
+            </div>
+
+            <button type="submit" class="btn btn-success">Register as a doctor</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div th:replace="/fragments.html :: scripts"></div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="/fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <br><br><br>
+    <div class="col-lg-6">
+        <form th:action="@{/patient/register}" th:object="${patient}" method="post">
+
+            <div class="form-group">
+                <label for="name" class="control-label">Name</label>
+                <input id="name" class="form-control" th:field="*{name}" />
+            </div>
+
+            <div class="form-group">
+                <label for="egn" class="control-label">EGN</label>
+                <input id="egn" class="form-control" th:field="*{egn}"/>
+            </div>
+
+            <fieldset>
+                <legend>User Role</legend>
+                <ul>
+                    <li>
+                        <input type="checkbox" th:field="*{hasPayedInsurance}"/>
+                        <label>Have you paid your insurance</label>
+                    </li>
+                </ul>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Personal Doctor</legend>
+                <ul>
+                    <li th:each="doctor : ${doctors}">
+                        <input type="radio" th:field="*{did}" th:value="${doctor.uid}" />
+                        <label th:text="${doctor.name}"></label>
+                        <label th:text="${doctor.type}"></label>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <button type="submit" class="btn btn-success">Register as a patient</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div th:replace="/fragments.html :: scripts"></div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="/fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <br><br><br>
+    <div class="col-lg-6">
+
+        <h1>Treatment assigned for this visit up to now: </h1>
+        <th:block th:each="t : ${tlist}">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Treatment</h5>
+                    <p class="card-text" th:text="${t.description}"></p>
+                </div>
+            </div>
+        </th:block>
+
+
+
+        <form th:action="@{/treatment/add/}" th:object="${objtreatment}" method="post">
+            <h1>Add treatment</h1>
+            <div class="form-group">
+                <label for="description" class="control-label">Treatment</label>
+                <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+            </div>
+            <input type="hidden" name="vid" th:value="${cvid}" />
+            <input type="hidden" name="pid" th:value="${cpid}" />
+            <input type="hidden" name="did" th:value="${cdid}" />
+
+            <button type="submit" class="btn btn-success">Complete visit</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div th:replace="/fragments.html :: scripts"></div>
+
+</body>
+</html>

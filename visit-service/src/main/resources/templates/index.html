@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <h2>Welcome <span th:text="${uname}"/></h2>
+
+    <div th:switch="${urole}">
+        <div th:case="Patient">
+            <a th:href="@{/patient/requestvisit}" class="btn btn-info">Request a visit with a doctor</a>
+            <a th:href="@{/patient/viewvisits/}+${cuid}" class="btn btn-info">View Visits</a>
+        </div>
+        <div th:case="Doctor">
+            <a th:href="@{/doctor/pendingvisits/}+${cuid}" class="btn btn-info">Check pending visits</a>
+            <a th:href="@{/doctor/patients/}+${cuid}" class="btn btn-info">How many patients have me as their personal doctor</a>
+            <div th:if="${pnum != 0}" th:text="${pnum}"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments.html :: scripts"></div>
+
+</body>
+</html>

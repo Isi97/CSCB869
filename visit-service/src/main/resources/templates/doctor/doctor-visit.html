@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="/fragments.html :: headerfiles"></head>
+<body>
+<nav th:replace="/fragments.html :: navigation">
+</nav>
+
+<br>
+<br>
+<div class="container">
+    <br><br><br>
+    <div class="col-lg-6">
+        <form th:action="@{/doctor/visit/}+${vid}" th:object="${visit}" method="post">
+            <h1>Fill out visit details</h1>
+            <div class="form-group">
+                <label for="diagnosis" class="control-label">Diagnosis</label>
+                <textarea id="diagnosis" class="form-control" th:field="*{diagnosis}"></textarea>
+            </div>
+
+            <input type="date" th:field="${visit.visitDate}" id="visitDate"/>
+            <br>
+            <input type="checkbox" th:field="${visit.sickLeave}" /><label>Grant sick leave</label><br>
+            <label>End of sick leave (starts on visit date)</label>
+            <input type="date" th:field="${visit.sickLeaveEnd}" id="sickLeaveEnd"/>
+
+            <button type="submit" class="btn btn-success">Complete visit</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div th:replace="/fragments.html :: scripts"></div>
+
+</body>
+</html>

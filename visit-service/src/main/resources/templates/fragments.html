@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:fragment="headerfiles">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <script th:href="@{/webjars/jquery/3.4.0/jquery.min.js} "></script>
+
+    <link rel="stylesheet" type="text/css" data-th-href="@{/css/style.css}"
+          media="all" />
+
+
+
+    <title th:text="${title}"></title>
+</head>
+
+
+
+<body>
+<nav th:fragment="navigation" class="navbar navbar-dark bg-dark">
+    <div class="container">
+            <a class="navbar-brand" href="#" th:href="@{/home}">Home</a>
+            <a sec:authorize="isAuthenticated()" class="btn btn-light" th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+
+<div th:fragment="scripts">
+    <script type="text/javascript"
+            th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript"
+            th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+</html>

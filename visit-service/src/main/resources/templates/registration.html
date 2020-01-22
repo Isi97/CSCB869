@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: headerfiles"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div th:if="${param.success}">
+                <div class="alert alert-info">Account registered successfully</div>
+            </div>
+
+            <h1>Registration</h1>
+            <form th:action="@{/registration}" th:object="${user}" method="post">
+
+                <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+                    error</p>
+
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+                    <label for="name" class="control-label">Username</label> <input
+                        id="name" class="form-control" th:field="*{name}" />
+                    <p class="error-message"
+                       th:each="error: ${#fields.errors('name')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                    <label for="password" class="control-label">Password</label> <input
+                        id="password" class="form-control" type="password"
+                        th:field="*{password}" />
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('password')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                    <label for="confirmPassword" class="control-label">Confirm
+                        password</label> <input id="confirmPassword" class="form-control"
+                                                type="password" th:field="*{confirmPassword}" />
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('confirmPassword')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+
+                <fieldset>
+                    <legend>User Role</legend>
+                    <ul>
+                        <li th:each="userRole : ${userRoles}">
+                            <input type="radio" th:field="*{role}" th:value="${userRole}" />
+                            <label
+
+                                    th:text="${userRole}">
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <span>Already registered? <a href="/" th:href="@{/login}">Login
+								here</a></span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>
